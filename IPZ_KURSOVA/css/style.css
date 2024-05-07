@@ -1,0 +1,481 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  transition-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+:root {
+  --base-color: rgb(254, 100, 64);
+  --base-color-active: rgb(207, 77, 47);
+  --black-text: rgb(36, 36, 36);
+  --gray-text: rgb(63, 63, 63);
+}
+
+body {
+  font-family: Arial, Verdana, sans-serif;
+  background-color: rgb(7, 44, 84);
+  color: var(--black-text);
+
+  transition: background-image 2s;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.app_container {
+  display: grid;
+  grid-template-rows: 200px auto;
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 0 10px;
+  height: 100vh;
+  gap: 20px;
+  transition: grid-template-rows 0.4s;
+}
+
+.app_container.app_container_top {
+  grid-template-rows: 84px auto;
+}
+.app_container-top {
+  align-self: flex-end;
+}
+
+.location-form {
+  position: relative;
+}
+
+.location-form_input {
+  display: block;
+  width: 100%;
+  padding: 10px 30px;
+  padding-right: 86px;
+  height: 64px;
+  background-color: white;
+  border: none;
+  outline: none;
+  border-radius: 32px;
+  text-transform: uppercase;
+  font-size: 18px;
+  transition: box-shadow 0.5s;
+}
+
+.location-form_input:focus {
+  box-shadow: 0px 0px 10px 5px rgb(0, 0, 0, 0.2);
+}
+
+.location-form_button {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  height: 58px;
+  width: 58px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 32px;
+  padding: 0;
+  visibility: hidden;
+  opacity: 0;
+  will-change: opacity, background-color;
+  transition: opacity 0.3s, visibility 0.3s, background-color 0.3s;
+}
+
+.location-form_button:hover {
+  background-color: var(--base-color);
+}
+
+.location-form_button:active {
+  background-color: var(--base-color-active);
+}
+
+.location-form_button:focus {
+  outline: none;
+}
+
+.location-form_icon {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50% - 10px);
+}
+
+.location-form_icon path {
+  transition: fill 0.3s;
+}
+
+.location-form_icon circle {
+  transition: stroke 0.3s;
+}
+
+.location-form_button:hover .location-form_icon path {
+  fill: white;
+}
+
+.location-form_button:hover .location-form_icon circle {
+  stroke: white;
+}
+
+.location-form_button:active .location-form_icon path {
+  fill: white;
+}
+
+.location-form_button:active .location-form_icon circle {
+  stroke: white;
+}
+
+.location-form_input:valid + .location-form_button {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* cards */
+.card {
+  background-color: white;
+  border-radius: 28px;
+  transition: box-shadow 0.4s, 0.4s width, height 0.4s, animation 0.4s,
+    background-color 0.4s, backdrop-filter 0.4s, color 0.4s;
+  will-change: width, height, transform, filter, backdrop-filter;
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  transform: scale(0);
+}
+
+.card_inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.4s, transform 0.4s;
+  transform: scale(0);
+  will-change: opacity, transform;
+  height: 100%;
+}
+
+.card_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.card_head-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.card-icon {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  background-size: 120%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url();
+  transition: width 0.4s, height 0.4s, background-image 0.4s;
+  will-change: width, height, background-image;
+}
+
+.card_title {
+  font-size: 28px;
+  margin: 0;
+  max-width: 280px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: transform 0.4s;
+  transform: translateY(-12px);
+  will-change: transform;
+}
+
+.card_desc {
+  position: absolute;
+  display: block;
+  opacity: 0.6;
+  transform: translateY(-10px);
+  will-change: opacity;
+  transition: opacity 0.4s, visibility 0.2s;
+}
+
+.card-param {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-param_icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  transition: fill 0.4s;
+}
+
+.card-param-icon_footer {
+  width: 26px;
+  height: 26px;
+}
+
+.card-param_text {
+  font-size: 20px;
+}
+
+.card_footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+  transition: opacity 0.4s;
+  will-change: opacity;
+  overflow: hidden;
+  /* opacity: 0; */
+}
+
+.card-param-text_footer {
+  font-size: 20px;
+}
+
+/* Loading */
+.card.loading {
+  width: 30px;
+  height: 30px;
+  transform: scale(1);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.3);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.card.full {
+  width: 100%;
+  height: 170px;
+  animation: none;
+  transform: scale(1);
+}
+
+.card.full .card_inner {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card.full .card_footer {
+  opacity: 0.6;
+}
+
+/* Standart card */
+.card.glass {
+  background-color: rgba(102, 102, 102, 0.25);
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+  backdrop-filter: blur(8px);
+
+  color: white;
+  height: 80px;
+  width: 100%;
+}
+
+.card.glass .card-param_icon {
+  fill: white;
+}
+
+.card.glass .card_inner {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card.glass .card_title {
+  transform: none;
+}
+
+.card.glass .card_desc {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.card.glass .card-icon {
+  width: 42px;
+  height: 42px;
+  filter: grayscale(1);
+}
+
+.card.glass .card-param_icon {
+  fill: white;
+}
+
+.card.glass:hover {
+  height: 170px;
+  background-color: rgba(33, 33, 33, 0.3);
+}
+
+.card.glass:hover .card_title {
+  transform: translateY(-12px);
+}
+
+.card.glass:hover .card-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.card.glass:hover .card_desc {
+  opacity: 1;
+  visibility: visible;
+}
+
+.card.glass:hover .card_footer {
+  opacity: 0.6;
+}
+
+/* acount buttons */
+.form_acount {
+  height: 60px; /* Задаємо бажану висоту */
+  display: flex; /* Встановлюємо контейнер на flexbox */
+  align-items: center; /* Вирівнюємо дочірні елементи по вертикалі по центру */
+  justify-content: flex-end;
+}
+
+.btn_reg,
+.btn_logIn {
+  margin-left: 25px; /* Задаємо відстань між кнопками */
+  font-family: Arial, Verdana, sans-serif;
+  color: var(--gray-text);
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  border: none;
+}
+
+.btn_logIn {
+  margin-right: 25px;
+}
+
+.btn_reg:hover,
+.btn_logIn:hover {
+  opacity: 0.6; /* Змінюємо прозорість при наведенні на кнопку */
+  cursor: pointer;
+}
+
+/* modal form for creating acount */
+.modal {
+  display: none; /* Початково приховуємо модальне вікно */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Задаємо прозорий фон */
+}
+
+.modal_acount-content,
+.modal_logIn-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content_without_close {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal_acount-content,
+.modal_logIn-content {
+  max-width: 800px;
+  margin: auto;
+  position: fixed; /* Встановлюємо позицію елемента */
+  top: 50%; /* Переміщуємо вгору на 50% від верхнього краю екрану */
+  left: 50%; /* Переміщуємо вправо на 50% від лівого краю екрану */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Зсуваємо елемент на 50% його власної ширини та висоти назад */
+}
+
+.modal-content_without_close h2 {
+  margin-bottom: 10px; /* Відступ після заголовка */
+  text-transform: uppercase;
+  color: rgb(7, 44, 84);
+}
+
+.modal-content_without_close p {
+  margin-bottom: 5px; /* Відступ після параграфа */
+  font-size: 15px;
+  color: rgb(7, 44, 84);
+}
+
+.modal-content_without_close input {
+  margin-bottom: 10px; /* Відступ після кожного вводу */
+  width: calc(
+    100% - 20px
+  ); /* Зменшуємо ширину на 20px для врахування внутрішніх відступів */
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px; /* Збільшуємо розмір тексту */
+}
+
+.btn_create_ac,
+.btn_logIn_ac {
+  margin-top: 20px; /* Відступ над кнопкою */
+  height: 40px;
+  border-radius: 5px;
+  font-size: 16px; /* Збільшуємо розмір тексту */
+  background-color: rgb(7, 44, 84);
+  color: white;
+  text-transform: uppercase;
+}
+.btn_create_ac:hover,
+.btn_logIn_ac:hover {
+  opacity: 0.9; /* Змінюємо прозорість при наведенні на кнопку */
+  cursor: pointer;
+}
+
+.validation-message {
+  font-size: 12px;
+  color: red;
+}
