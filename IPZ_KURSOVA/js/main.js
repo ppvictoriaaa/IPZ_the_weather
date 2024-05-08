@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", function () {
 const APIKey = '2f6eda8a8af558ce4ff7adf8d766b986'
 
 const $cardsBox = document.getElementById('cards-box')
@@ -235,7 +236,6 @@ window.onclick = function(event) {
 }
 
 
-document.addEventListener("DOMContentLoaded", function () {
   var btnCreateAcount = document.querySelector(".btn_create_ac");
   var btnLogInAcount = document.querySelector(".btn_logIn_ac");
   var btnReg = document.getElementById("btn_reg");
@@ -321,4 +321,27 @@ document.addEventListener("DOMContentLoaded", function () {
       acountAttributes.style.display = "flex";
     }
   }
+
+    var acountIconBtn = document.getElementById("acount_icon");
+
+  acountIconBtn.addEventListener("click", function () {
+    // Відкриття діалогового вікна для вибору файлу
+    var input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*"; // Дозволяє вибрати лише зображення
+    input.click();
+
+    // Обробка вибраного файлу
+    input.addEventListener("change", function () {
+      var file = input.files[0];
+
+      if (file) {
+        // Створення об'єкту URL для вибраного файлу
+        var imageURL = URL.createObjectURL(file);
+
+        // Встановлення фонового зображення для кнопки acount_icon
+        acountIconBtn.style.backgroundImage = "url('" + imageURL + "')";
+      }
+    });
+  });
 });

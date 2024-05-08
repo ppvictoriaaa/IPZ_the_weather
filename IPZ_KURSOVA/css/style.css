@@ -499,6 +499,8 @@ body {
   background-size: cover;
   background-position: center;
   margin-right: 30px; /* Відступ відправа для вирівнювання кнопки з правого краю */
+  background-repeat: no-repeat;
+  margin-right: 25px;
 }
 
 .acount_icon:hover {
