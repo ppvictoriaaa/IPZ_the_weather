@@ -236,14 +236,41 @@ window.onclick = function(event) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  var createAccountButton = document.querySelector(".btn_create_ac");
+  var btnCreateAcount = document.querySelector(".btn_create_ac");
+  var btnLogInAcount = document.querySelector(".btn_logIn_ac");
+  var btnReg = document.getElementById("btn_reg");
+  var btnLogIn = document.getElementById("btn_logIn");
+  var acountAttributes = document.querySelector(".acount_attributes");
+  var modalAc = document.getElementById("modal_acount");
+  var modalLog = document.getElementById("modal_logIn");
+  var btnAcountName = document.getElementById("acount_name");
 
-  createAccountButton.addEventListener("click", function () {
-    console.log("Button clicked!");
-    validateInputs();
+
+  btnCreateAcount.addEventListener("click", function () {
+    console.log("Create account button clicked!");
+    validateInputsAndReplaceButtons();
+    updateAcountName();
+
   });
 
-  function validateInputs() {
+  function updateAcountName() {
+    var usernameInput = document.getElementById("modal_acount-input_username").value;
+
+    btnAcountName.textContent = usernameInput;
+  }
+
+  btnLogInAcount.addEventListener("click", function () {
+    console.log("Log in button clicked!");
+    validateInputsAndReplaceButtons(); //тут буде функція, яка перевіряє чи є такий користувач в базі даних
+      btnReg.style.display = "none";
+      btnLogIn.style.display = "none";
+      modalAc.style.display = "none";
+      modalLog.style.display = "none";
+
+      acountAttributes.style.display = "flex";
+  });
+
+  function validateInputsAndReplaceButtons() {
     var usernameInput = document.getElementById("modal_acount-input_username");
     var emailInput = document.getElementById("modal_acount-input_email");
     var passwordInput = document.getElementById("modal_acount-input_password");
@@ -252,9 +279,15 @@ document.addEventListener("DOMContentLoaded", function () {
     var emailValidationMessage = document.getElementById("email-validation-message");
     var passwordValidationMessage = document.getElementById("password-validation-message");
 
-    // Перевірка імені користувача
     var usernamePattern = /^[a-zA-Z0-9_-]{3,16}$/;
-    if (!usernamePattern.test(usernameInput.value)) {
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    var isUsernameValid = usernamePattern.test(usernameInput.value);
+    var isEmailValid = emailPattern.test(emailInput.value);
+    var isPasswordValid = passwordPattern.test(passwordInput.value);
+
+    if (!isUsernameValid) {
       usernameValidationMessage.innerHTML = "Wrong username. Only letters, numbers, dashes (-), and underscores (_) are allowed.";
       usernameValidationMessage.style.display = "block";
     } else {
@@ -262,9 +295,7 @@ document.addEventListener("DOMContentLoaded", function () {
       usernameValidationMessage.style.display = "none";
     }
 
-    // Перевірка електронної пошти
-    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(emailInput.value)) {
+    if (!isEmailValid) {
       emailValidationMessage.innerHTML = "Incorrect email format.";
       emailValidationMessage.style.display = "block";
     } else {
@@ -272,15 +303,22 @@ document.addEventListener("DOMContentLoaded", function () {
       emailValidationMessage.style.display = "none";
     }
 
-    // Перевірка пароля
-    var passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    if (!passwordPattern.test(passwordInput.value)) {
+    if (!isPasswordValid) {
       passwordValidationMessage.innerHTML = "Incorrect password. Your password must contain at least one letter and one number and be at least 8 characters long.";
       passwordValidationMessage.style.display = "block";
     } else {
       passwordValidationMessage.innerHTML = "";
       passwordValidationMessage.style.display = "none";
     }
+
+    if (isUsernameValid && isEmailValid && isPasswordValid) {
+      // If all inputs are valid, replace buttons with acount_attributes
+      btnReg.style.display = "none";
+      btnLogIn.style.display = "none";
+      modalAc.style.display = "none";
+      modalLog.style.display = "none";
+
+      acountAttributes.style.display = "flex";
+    }
   }
-}
-)
+});
