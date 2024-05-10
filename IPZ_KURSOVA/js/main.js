@@ -344,4 +344,180 @@ window.onclick = function(event) {
       }
     });
   });
+
+  // Отримуємо кнопку
+var btn__name = document.getElementById("acount_name");
+
+// Отримуємо модальне вікно для створення облікового запису
+var modalInfoAc = document.getElementById("info_acount");
+
+
+// Отримуємо елемент закриття модального вікна
+var closeInfo = document.getElementsByClassName("closeInfo")[0];
+
+
+// Показуємо модальне вікно при натисканні на кнопку створення облікового запису
+btn__name.onclick = function() {
+  modalInfoAc.style.display = "block";
+}
+
+// Приховуємо модальне вікно при натисканні на хрестик
+closeInfo.onclick = function() {
+  modalInfoAc.style.display = "none";
+}
+
+
+// Приховуємо модальне вікно при натисканні за межами вікна
+window.onclick = function(event) {
+  if (event.target == modalInfoAc) {
+    modalInfoAc.style.display = "none";
+  }
+  }
+  
+  
+  
+  var saveChangesButton = document.querySelector(".btn_save_changes");
+
+  saveChangesButton.addEventListener("click", function () {
+    console.log("Save changes button clicked!");
+    var isDataValid = validateInputsAndSaveChanges();
+    if (isDataValid) {
+      modalInfoAc.style.display = "none";
+      saveNewAcountName();
+      
+    }
+
+  })
+
+  function saveNewAcountName() {
+    var newUsernameInput = document.getElementById("info_acount-input_username").value;
+    btnAcountName.textContent = newUsernameInput;
+  }
+
+  function validateInputsAndSaveChanges() {
+    var usernameInput2 = document.getElementById("info_acount-input_username");
+    var emailInput2 = document.getElementById("info_acount-input_email");
+
+    var usernameValidationMessage2 = document.getElementById("username-validation-message_new");
+    var emailValidationMessage2 = document.getElementById("email-validation-message_new");
+
+    var usernamePattern = /^[a-zA-Z0-9_-]{3,16}$/;
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    var isUsernameValid2 = usernamePattern.test(usernameInput2.value);
+    var isEmailValid2 = emailPattern.test(emailInput2.value);
+
+    if (!isUsernameValid2) {
+      usernameValidationMessage2.innerHTML = "Wrong username. Only letters, numbers, dashes (-), and underscores (_) are allowed.";
+      usernameValidationMessage2.style.display = "block";
+    } else {
+      usernameValidationMessage2.innerHTML = "";
+      usernameValidationMessage2.style.display = "none";
+    }
+
+    if (!isEmailValid2) {
+      emailValidationMessage2.innerHTML = "Incorrect email format.";
+      emailValidationMessage2.style.display = "block";
+    } else {
+      emailValidationMessage2.innerHTML = "";
+      emailValidationMessage2.style.display = "none";
+    }
+
+    return isUsernameValid2 && isEmailValid2;
+  }
+
+
+   // Отримуємо кнопку
+var btnMakeNewsletter = document.getElementById("btn_newsletter");
+
+// Отримуємо модальне вікно для створення облікового запису
+var modalLetter = document.getElementById("get_newsletter");
+
+
+// Отримуємо елемент закриття модального вікна
+var closeLetter = document.getElementsByClassName("closeLetter")[0];
+
+
+// Показуємо модальне вікно при натисканні на кнопку створення облікового запису
+btnMakeNewsletter.onclick = function() {
+  modalLetter.style.display = "block";
+}
+
+// Приховуємо модальне вікно при натисканні на хрестик
+closeLetter.onclick = function() {
+  modalLetter.style.display = "none";
+}
+// Приховуємо модальне вікно при натисканні за межами вікна
+window.onclick = function(event) {
+  if (event.target == modalLetter) {
+    modalLetter.style.display = "none";
+  }
+  }
+  
+  var connectNewsletter = document.querySelector(".btn_connect_newsletter");
+
+  connectNewsletter.addEventListener("click", function () {
+    console.log("Connect newsletter button clicked!");
+    var isDataValid = validateInputsAndConnectNewsletter();
+    if (isDataValid) {
+      modalLetter.style.display = "none";
+      messageAboutConnecting();
+      
+    }
+
+  })
+
+function messageAboutConnecting() {
+Swal.fire({
+  text: 'A WEATHER NEWSLETTER WAS CONNECTED SUCCESSFULLY',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  customClass: {
+    popup: 'connecting_win-class', // власний клас для віконця
+  },
+});
+
+
+}
+
+  function validateInputsAndConnectNewsletter() {
+  var emailInput3 = document.getElementById("email_newsletter-input");
+  var emailValidationMessage3 = document.getElementById("email-validation-message_letter");
+  var radioButtonsValidation = document.getElementById("radioButtons-validation-message");
+  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var isEmailValid3 = emailPattern.test(emailInput3.value);
+
+  var radioBtnisChecked = false; // Оголошуємо змінну для перевірки обраного радіобаттону
+
+  // Отримуємо всі radiobuttons
+  var radioButtons = document.querySelectorAll('.input_options');
+
+  // Перевіряємо, чи хоча б один radiobutton обраний
+  radioButtons.forEach(function (radioButton) {
+    if (radioButton.checked) {
+      radioBtnisChecked = true;
+    }
+  });
+
+  if (!isEmailValid3) {
+    emailValidationMessage3.innerHTML = "Incorrect email format.";
+    emailValidationMessage3.style.display = "block";
+  } else {
+    emailValidationMessage3.innerHTML = "";
+    emailValidationMessage3.style.display = "none";
+  }
+
+  if (!radioBtnisChecked) {
+    radioButtonsValidation.innerHTML = "Choose one option";
+    radioButtonsValidation.style.display = "block";
+  } else {
+    radioButtonsValidation.innerHTML = "";
+    radioButtonsValidation.style.display = "none";
+  }
+
+  return isEmailValid3 && radioBtnisChecked;
+}
+
+
 });

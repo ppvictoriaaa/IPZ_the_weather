@@ -397,7 +397,9 @@ body {
 }
 
 .modal_acount-content,
-.modal_logIn-content {
+.modal_logIn-content,
+.info_acount-content,
+.get_newsletter-content {
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
@@ -405,7 +407,9 @@ body {
   width: 80%;
 }
 
-.close {
+.close,
+.closeInfo,
+.closeLetter {
   color: #aaa;
   float: right;
   font-size: 28px;
@@ -413,19 +417,27 @@ body {
 }
 
 .close:hover,
-.close:focus {
+.close:focus,
+.closeInfo:hover,
+.closeInfo:focus,
+.closeLetter:hover,
+.closeLetter:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
 
-.modal-content_without_close {
+.modal-content_without_close,
+.info_acount-without_close,
+.get_newsletter-without_close {
   display: flex;
   flex-direction: column;
 }
 
 .modal_acount-content,
-.modal_logIn-content {
+.modal_logIn-content,
+.info_acount-content,
+.get_newsletter-content {
   max-width: 800px;
   margin: auto;
   position: fixed; /* Встановлюємо позицію елемента */
@@ -437,19 +449,23 @@ body {
   ); /* Зсуваємо елемент на 50% його власної ширини та висоти назад */
 }
 
-.modal-content_without_close h2 {
+.modal-content_without_close h2,
+.info_acount-without_close h2,
+.get_newsletter-without_close h2 {
   margin-bottom: 10px; /* Відступ після заголовка */
   text-transform: uppercase;
   color: rgb(7, 44, 84);
 }
 
-.modal-content_without_close p {
+.modal-content_without_close p,
+.info_acount-without_close p {
   margin-bottom: 5px; /* Відступ після параграфа */
   font-size: 15px;
   color: rgb(7, 44, 84);
 }
 
-.modal-content_without_close input {
+.modal-content_without_close input,
+.info_acount-without_close input {
   margin-bottom: 10px; /* Відступ після кожного вводу */
   width: calc(
     100% - 20px
@@ -460,7 +476,9 @@ body {
 }
 
 .btn_create_ac,
-.btn_logIn_ac {
+.btn_logIn_ac,
+.btn_save_changes,
+.btn_connect_newsletter {
   margin-top: 20px; /* Відступ над кнопкою */
   height: 40px;
   border-radius: 5px;
@@ -470,7 +488,9 @@ body {
   text-transform: uppercase;
 }
 .btn_create_ac:hover,
-.btn_logIn_ac:hover {
+.btn_logIn_ac:hover,
+.btn_save_changes:hover,
+.btn_connect_newsletter:hover {
   opacity: 0.9; /* Змінюємо прозорість при наведенні на кнопку */
   cursor: pointer;
 }
@@ -490,7 +510,7 @@ body {
 }
 
 .acount_icon {
-  border: 4px solid gray;
+  border: none;
   border-radius: 50%;
   overflow: hidden;
   width: 70px;
@@ -498,9 +518,7 @@ body {
   background-color: black;
   background-size: cover;
   background-position: center;
-  margin-right: 30px; /* Відступ відправа для вирівнювання кнопки з правого краю */
   background-repeat: no-repeat;
-  margin-right: 25px;
 }
 
 .acount_icon:hover {
@@ -529,6 +547,13 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20px;
+  background-color: white;
+  border-radius: 15px;
+  height: 70px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: 15px;
+  margin-top: 15px;
 }
 
 .acount_name {
@@ -542,4 +567,46 @@ body {
 
 .acount_name:hover {
   opacity: 0.7;
+}
+
+.form_for_newsletter .input {
+  float: right;
+}
+
+.form_for_newsletter label {
+  margin-right: 5px;
+}
+
+.get_newsletter-without_close .p {
+  margin-bottom: 5px; /* Відступ після параграфа */
+  font-size: 15px;
+  color: rgb(7, 44, 84);
+}
+
+.get_newsletter-without_close .input {
+  margin-bottom: 10px; /* Відступ після кожного вводу */
+  width: calc(
+    100% - 20px
+  ); /* Зменшуємо ширину на 20px для врахування внутрішніх відступів */
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px; /* Збільшуємо розмір тексту */
+}
+
+.get_newsletter-without_close label {
+  margin-bottom: 15px; /* Відступ після кожного вводу */
+  width: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 15px; /* Збільшуємо розмір тексту */
+}
+
+.connecting_win-class {
+  height: 90px;
+  width: 500px;
+}
+
+.connecting_content-class {
+  font-family: Arial, Helvetica, sans-serif;
+  color: red;
 }
