@@ -16,44 +16,48 @@
             <span class="close">&times;</span>
             <div class="modal-content_without_close">
               <h2>Fill out the form</h2>
-              <p>username</p>
+              <label for="username">username</label>
               <input
                 type="text"
                 class="modal_acount-input_username"
                 id="modal_acount-input_username"
+                name="username"
                 placeholder="create username"
                 required />
               <span
                 id="username-validation-message"
                 class="validation-message"
                 style="display: none"></span>
-              <p>email</p>
+              <label for="email">email</label>
               <input
                 type="email"
                 class="modal_acount-input_email"
                 id="modal_acount-input_email"
+                name="email"
                 placeholder="enter your email"
                 required />
               <span
                 id="email-validation-message"
                 class="validation-message"
                 style="display: none"></span>
-              <p>password</p>
+              <label for="password">password</label>
               <input
                 type="password"
                 class="modal_acount-input_password"
                 id="modal_acount-input_password"
+                name="password"
                 placeholder="create a password"
                 required />
               <span
                 id="password-validation-message"
                 class="validation-message"
                 style="display: none"></span>
-              <button class="btn_create_ac">Create acount</button>
+          
+              <button type="submit" class="btn_create_ac">Create acount</button>
             </div>
           </div>
         </div>
-        <div id="modal_logIn" class="modal">
+        <form id="modal_logIn" class="modal">
           <div class="modal_logIn-content">
             <span class="close">&times;</span>
             <div class="modal-content_without_close">
@@ -75,7 +79,7 @@
               <button class="btn_logIn_ac">Log in</button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div class="form_acount">
         <button id="btn_reg" class="btn_reg">Create account</button>
@@ -122,6 +126,9 @@
         </div>
       </div>
     </div>
+                      {{#if message}}
+                      <span id="password-validation-message" class="validation-message" style="display: none">{{message}}</span>
+                      {{/if}}
 
     <script defer type="module" src="/js/main2.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

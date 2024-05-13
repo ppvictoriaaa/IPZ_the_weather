@@ -1,42 +1,21 @@
 const express = require("express");
-const mysql = require("mysql");
-const path = require("path");
-const dotenv = require("dotenv");
-
-dotenv.config({ path: "./.env" });
-
+const db = require("./routes/db-config");
 const app = express();
-
-const db = mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE,
-});
-
-app.set("view engine", "hbs");
-
-db.connect((error) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("MySql Connected...");
-  }
-});
-
+const cookie = require("cookie-parser");
+const PORT = process.env.PORT || 3000;
+const path = require("path");
 const publicDirectory = path.join(__dirname, "./public");
 app.use(express.static(publicDirectory));
+app.set("view engine", "hbs");
+app.set("views", "./views");
+app.use(cookie());
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.render("index2");
+db.connect((err) => {
+  if (err) throw err;
+  console.log(`Batabase is working: http//:localhost:${PORT}`);
 });
 
-app.get("/user", (req, res) => {
-  res.render("user");
-});
-
-const PORT = 3000;
-
-app.listen(3000, () => {
-  console.log(`server is working: http://localhost:${PORT}`);
-});
+app.use("/", require("./routes/pages"));
+app.use("/api", require("./controllers/auth"));
+app.listen(PORT);

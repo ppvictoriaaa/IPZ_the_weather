@@ -301,6 +301,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (isUsernameValid && isEmailValid && isPasswordValid) {
       modalAc.style.display = "none";
       modalLog.style.display = "none";
+      window.location.href = "/user";
     }
   }
 });
