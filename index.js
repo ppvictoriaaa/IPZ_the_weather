@@ -28,7 +28,11 @@ const publicDirectory = path.join(__dirname, "./public");
 app.use(express.static(publicDirectory));
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index2");
+});
+
+app.get("/user", (req, res) => {
+  res.render("user");
 });
 
 const PORT = 3000;

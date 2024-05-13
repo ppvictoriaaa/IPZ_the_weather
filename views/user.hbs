@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The weather</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style2.css" />
   </head>
 
   <body id="body">
     <div class="app" id="app">
-      <div class="acount_attributes" style="display: none">
+      <div class="acount_attributes">
         <button id="btn_newsletter" class="btn_newsletter">
           create a weather newsletter
         </button>
@@ -18,79 +18,6 @@
           <button id="acount_icon" class="acount_icon"></button>
         </div>
       </div>
-      <!-- forms for acount -->
-      <div class="buttons_forms">
-        <div id="modal_acount" class="modal">
-          <div class="modal_acount-content">
-            <span class="close">&times;</span>
-            <div class="modal-content_without_close">
-              <h2>Fill out the form</h2>
-              <p>username</p>
-              <input
-                type="text"
-                class="modal_acount-input_username"
-                id="modal_acount-input_username"
-                placeholder="create username"
-                required />
-              <span
-                id="username-validation-message"
-                class="validation-message"
-                style="display: none"></span>
-              <p>email</p>
-              <input
-                type="email"
-                class="modal_acount-input_email"
-                id="modal_acount-input_email"
-                placeholder="enter your email"
-                required />
-              <span
-                id="email-validation-message"
-                class="validation-message"
-                style="display: none"></span>
-              <p>password</p>
-              <input
-                type="password"
-                class="modal_acount-input_password"
-                id="modal_acount-input_password"
-                placeholder="create a password"
-                required />
-              <span
-                id="password-validation-message"
-                class="validation-message"
-                style="display: none"></span>
-              <button class="btn_create_ac">Create acount</button>
-            </div>
-          </div>
-        </div>
-        <div id="modal_logIn" class="modal">
-          <div class="modal_logIn-content">
-            <span class="close">&times;</span>
-            <div class="modal-content_without_close">
-              <h2>fill in your details</h2>
-              <p>email</p>
-              <input
-                type="email"
-                class="modal_logIn-input_email"
-                id="modal_logIn-input_email"
-                placeholder="enter your email"
-                required />
-              <p>password</p>
-              <input
-                type="password"
-                class="modal_logIn-input_password"
-                id="modal_logIn-input_password"
-                placeholder="enter your password"
-                required />
-              <button class="btn_logIn_ac">Log in</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="form_acount">
-        <button id="btn_reg" class="btn_reg">Create account</button>
-        <button id="btn_logIn" class="btn_logIn">Log in</button>
-      </div>
-
       <!-- after log in -->
       <div id="info_acount" class="modal">
         <div class="info_acount-content">
@@ -230,7 +157,7 @@
       </div>
     </div>
 
-    <script defer type="module" src="/js/main.js"></script>
+    <script defer type="module" src="/js/main_user.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>

@@ -4,20 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The weather</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style2.css" />
   </head>
 
   <body id="body">
     <div class="app" id="app">
-      <div class="acount_attributes" style="display: none">
-        <button id="btn_newsletter" class="btn_newsletter">
-          create a weather newsletter
-        </button>
-        <div class="acount">
-          <button id="acount_name" class="acount_name">name</button>
-          <button id="acount_icon" class="acount_icon"></button>
-        </div>
-      </div>
       <!-- forms for acount -->
       <div class="buttons_forms">
         <div id="modal_acount" class="modal">
@@ -90,104 +81,6 @@
         <button id="btn_reg" class="btn_reg">Create account</button>
         <button id="btn_logIn" class="btn_logIn">Log in</button>
       </div>
-
-      <!-- after log in -->
-      <div id="info_acount" class="modal">
-        <div class="info_acount-content">
-          <span class="closeInfo">&times;</span>
-          <div class="info_acount-without_close">
-            <h2>your information</h2>
-            <p>your username</p>
-            <input
-              type="text"
-              class="info_acount-input_username"
-              id="info_acount-input_username"
-              placeholder="your username"
-              required />
-            <span
-              id="username-validation-message_new"
-              class="validation-message"
-              style="display: none"></span>
-            <p>your email</p>
-            <input
-              type="email"
-              class="info_acount-input_email"
-              id="info_acount-input_email"
-              placeholder="your email"
-              required />
-            <span
-              id="email-validation-message_new"
-              class="validation-message"
-              style="display: none"></span>
-            <button class="btn_save_changes">Save changes</button>
-          </div>
-        </div>
-      </div>
-      <!-- Form of newsletter -->
-      <div id="get_newsletter" class="modal">
-        <div class="get_newsletter-content">
-          <span class="closeLetter">&times;</span>
-          <div class="get_newsletter-without_close">
-            <h2>I want to get a newsletter about the weather</h2>
-            <p class="p">region</p>
-            <input
-              class="input"
-              type="text"
-              class="region_newsletter-input"
-              id="region_newsletter-input"
-              placeholder="enter your region"
-              required />
-            <span
-              id="no_region"
-              class="validation-message"
-              style="display: none"></span>
-
-            <p class="p">email for a newsletter</p>
-            <input
-              class="input"
-              type="email"
-              class="email_newsletter-input"
-              id="email_newsletter-input"
-              placeholder="enter your email"
-              required />
-            <span
-              id="email-validation-message_letter"
-              class="validation-message"
-              style="display: none"></span>
-            <p class="p">how often do you want get it?</p>
-            <form id="form_for_newsletter" class="form_for_newsletter">
-              <input
-                class="input_options"
-                type="radio"
-                id="day"
-                name="answer"
-                value="day" />
-              <label for="day">once a day</label><br />
-              <input
-                class="input_options"
-                type="radio"
-                id="week"
-                name="answer"
-                value="week" />
-              <label for="week">once a week</label><br />
-              <input
-                class="input_options"
-                type="radio"
-                id="mounth"
-                name="answer"
-                value="mounth" />
-              <label for="mounth">once a mounth</label><br />
-            </form>
-            <span
-              id="radioButtons-validation-message"
-              class="validation-message"
-              style="display: none"></span>
-            <button class="btn_connect_newsletter">
-              Connect the newsletter
-            </button>
-          </div>
-        </div>
-      </div>
       <div class="app_container">
         <!-- upper part -->
         <div class="app_container-top">
@@ -230,7 +123,7 @@
       </div>
     </div>
 
-    <script defer type="module" src="/js/main.js"></script>
+    <script defer type="module" src="/js/main2.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>
