@@ -1,0 +1,59 @@
+/* CSS для форми реєстрації */
+.reg_form_container {
+  width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.reg_form_header {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: rgb(7, 44, 84);
+}
+
+.reg_form_body {
+  display: flex;
+  flex-direction: column;
+}
+
+.reg_form_group {
+  margin-bottom: 35px;
+  text-transform: lowercase;
+}
+
+label {
+  display: block;
+  margin-bottom: 3px;
+  color: rgb(7, 44, 84);
+}
+
+input.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input.form-control:hover {
+  border: 1px solid rgb(7, 44, 84);
+  border-radius: 15px;
+}
+
+.btn_register {
+  width: 100%;
+  padding: 15px;
+  background-color: rgb(7, 44, 84);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.btn_register:hover {
+  opacity: 0.9;
+  border-radius: 15px;
+}

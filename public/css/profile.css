@@ -1,0 +1,35 @@
+.app_container_profile {
+  width: 80%; /* Ширина контейнера */
+  margin: 0 auto; /* Автоматичні відступи зверху та знизу, автоматичне центрування по горизонталі */
+  display: flex;
+  justify-content: space-between; /* Розміщення елементів по краях контейнера */
+  background-color: #fff; /* Фон білий */
+  padding: 30px; /* Відступи всередині контейнера */
+  border-radius: 8px; /* Округлені кути */
+}
+
+.app_left_container {
+  flex: 1; /* Займає всю доступну ширину відступу контейнера */
+  max-width: 35%; /* Максимальна ширина лівого контейнера */
+}
+
+.app_right_container {
+  flex: 1; /* Займає всю доступну ширину відступу контейнера */
+  max-width: 55%; /* Максимальна ширина правого контейнера */
+  text-align: left; /* Вирівнювання тексту по лівому краю */
+  overflow-wrap: break-word; /* Перенесення слова при виході за межі блоку */
+}
+
+/* image upload */
+.image-upload-container {
+  text-align: left; /* Вирівнювання картинки по лівому краю */
+}
+
+.upload-button:hover {
+  cursor: pointer;
+}
+
+.create-newsletter-button {
+  margin-top: 15px; /* Відступ від тексту до кнопки */
+  font-size: 14px; /* Розмір шрифту кнопки */
+}

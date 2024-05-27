@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The weather</title>
+    <link rel="stylesheet" href="/css/register.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
+
+  <body id="body">
+    <div class="app" id="app">
+      <nav class="nav_container">
+        <h2>Your weather</h2>
+        <ul class="nav_list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+        </ul>
+      </nav>
+
+      <div class="reg_form_container">
+        <div class="reg_form_header">Fill out the form</div>
+        <div class="reg_form_body">
+          <form action="/auth/register" method="POST">
+            <div class="reg_form_group">
+              <!-- USERNAME -->
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username" />
+            </div>
+
+            <div class="reg_form_group">
+              <!-- EMAIL -->
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email" />
+            </div>
+
+            <div class="reg_form_group">
+              <!-- PASSWORD -->
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password" />
+            </div>
+
+            <div class="reg_form_group">
+              <!-- PASSWORD CONFIRM -->
+              <label for="passwordConfirm">Confirm your password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="passwordConfirm"
+                name="passwordConfirm" />
+            </div>
+            {{#if message}}
+            <h4 class="alert-danger">{{message}}</h4>
+            {{/if}}
+            <button type="submit" class="btn_register">Create a user</button>
+
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>

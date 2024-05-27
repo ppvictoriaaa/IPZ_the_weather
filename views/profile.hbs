@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The weather</title>
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+
+</head>
+
+<body id="body">
+    <div class="app" id="app">
+        <nav class="nav_container">
+            <h2>Your weather</h2>
+            <ul class="nav_list">
+                <li><a href="/">Home</a></li>
+                {{#if user}}
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+                {{else}}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+                {{/if}}
+            </ul>
+        </nav>
+
+        <div class="app_container_profile">
+<div class="app_left_container">
+    <!-- image upload -->
+    <div class="image-upload-container">
+        <!-- input для завантаження файлів (прихований) -->
+        <input type="file" id="image-upload-input" style="display: none;" accept="image/*" />
+        <!-- кнопка для вибору зображення -->
+        <button id="upload-button" class="upload-button">Select Image</button>
+        <!-- попередній перегляд зображення -->
+        <img src="img/default_photo.jpg" alt="Upload Image" id="upload-preview" class="upload-image" />
+        <div class="username">{{account.username}}</div>
+    </div>
+
+</div>
+
+
+            <div class="app_right_container">
+                <p>This will allow you to receive weather updates daily in your selected region.
+                    fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
+                    <!-- create newsletter button -->
+                    <button class="create-newsletter-button" id="create-newsletter-button">Create a weather newsletter</button>
+            </div>
+        </div>
+    </div>
+    <script defer type="module" src="js/profile.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>

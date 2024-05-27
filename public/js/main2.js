@@ -240,19 +240,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   btnCreateAcount.addEventListener("click", function () {
     console.log("Create account button clicked!");
-    validateInputsAndReplaceButtons();
   });
 
   btnLogInAcount.addEventListener("click", function () {
     console.log("Log in button clicked!");
+    validateInputsAndReplaceButtons();
     modalAc.style.display = "none";
     modalLog.style.display = "none";
   });
 
   function validateInputsAndReplaceButtons() {
-    var usernameInput = document.getElementById("modal_acount-input_username");
-    var emailInput = document.getElementById("modal_acount-input_email");
-    var passwordInput = document.getElementById("modal_acount-input_password");
+    var usernameInput = document.getElementById("username");
+    var emailInput = document.getElementById("email");
+    var passwordInput = document.getElementById("password");
 
     var usernameValidationMessage = document.getElementById(
       "username-validation-message"
@@ -301,7 +301,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (isUsernameValid && isEmailValid && isPasswordValid) {
       modalAc.style.display = "none";
       modalLog.style.display = "none";
-      window.location.href = "/user";
     }
   }
+
+
 });
