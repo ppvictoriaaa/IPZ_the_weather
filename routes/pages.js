@@ -1,8 +1,6 @@
 const express = require("express");
 const { checkAuth } = require("../middleware/auth");
 const router = express.Router();
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
 
 router.get("/", checkAuth, (req, res) => {
   res.render("home", {

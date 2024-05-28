@@ -79,12 +79,23 @@ exports.login = (req, res) => {
         });
       }
 
-      const id = user.id;
+      const id = user.account_id;
       const username = user.username;
+      const email = user.email;
+      const profile_photo = user.profile_photo;
 
-      const token = jwt.sign({ id, username }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN,
-      });
+      console.log(id);
+      console.log(username);
+
+      const token = jwt.sign(
+        { id, username, email, profile_photo },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: process.env.JWT_EXPIRES_IN,
+        }
+      );
+
+      console.log(token);
 
       const cookieOptions = {
         expires: new Date(
@@ -97,4 +108,64 @@ exports.login = (req, res) => {
       res.status(200).redirect("/");
     }
   );
+};
+
+exports.uploadPhoto = async (req, res) => {
+  const { file } = req;
+  const token = req.cookies.jwt;
+
+  if (!token) {
+    console.log("No token found");
+    return res.status(401).redirect("/login");
+  }
+
+  console.log(token);
+
+  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+    if (err) {
+      console.log("Token verification failed:", err);
+      return res.status(401).redirect("/login");
+    }
+    console.log(decoded);
+    const userId = decoded.id;
+    console.log("Decoded userId:", userId);
+
+    if (!userId) {
+      console.log("User ID is undefined");
+      return res.status(401).redirect("/login");
+    }
+
+    const photoPath = `/upload/${file.filename}`;
+    console.log(photoPath);
+
+    try {
+      await db.query(
+        "UPDATE account SET profile_photo = ? WHERE account_id = ?",
+        [photoPath, userId]
+      );
+
+      // Отримання нових даних користувача після оновлення фото
+      const updatedUser = await db.query(
+        "SELECT * FROM account WHERE account_id = ?",
+        [userId]
+      );
+
+      // Отримання інформації про користувача
+      const new_profile_photo = updatedUser[0];
+
+      // Оновлення посилання на зображення на сторінці за допомогою JavaScript
+      const script = `
+        <script>
+          const profilePicture = document.querySelector('.profile-picture img');
+          profilePicture.src = '${new_profile_photo}';
+        </script>
+      `;
+
+      // Перенаправлення користувача на сторінку профілю з оновленою інформацією
+      res.send(script + "<p>Photo uploaded successfully. Redirecting...</p>");
+    } catch (error) {
+      console.log("Database error:", error);
+      return res.status(500).redirect("/profile");
+    }
+  });
 };
