@@ -1,27 +1,8 @@
 const express = require("express");
-
+const { checkAuth } = require("../middleware/auth");
 const router = express.Router();
-
-const jwt = require("jsonwebtoken");
-
-// Middleware для перевірки JWT
-const checkAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
-      if (err) {
-        res.locals.user = null;
-        next();
-      } else {
-        res.locals.user = decodedToken;
-        next();
-      }
-    });
-  } else {
-    res.locals.user = null;
-    next();
-  }
-};
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 router.get("/", checkAuth, (req, res) => {
   res.render("home", {
