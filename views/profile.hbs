@@ -29,13 +29,13 @@
                 <!-- image upload -->
                 <div class="image-upload-container">
                     <div class="profile-picture">
-                        <img src="{{user.profile_photo}}"
-                            alt="Profile Picture" width="150" height="150">
+                        <img src="{{user.profile_photo}}" alt="Profile Picture" width="150" height="150">
                     </div>
-                    <form action="/auth/upload-photo" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="profile_photo" accept="image/*" required />
-                        <button type="submit">Upload Photo</button>
-                    </form>
+                <form id="photo-upload-form" action="/auth/upload-photo" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="profile_photo" accept="image/*" required />
+                    <button type="submit">Upload Photo</button>
+                </form>
+
                 </div>
             </div>
             <div class="app_right_container">

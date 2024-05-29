@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The weather</title>
+    <link rel="stylesheet" href="/css/register.css" />
+    <link rel="stylesheet" href="/css/newsletter.css" />
+    <link rel="stylesheet" href="/css/login.css" />
+</head>
+
+<body id="body">
+    <div class="newsletter_form">
+        <div class="newsletter_form-header">Fill out with your data</div>
+        <div class="newsletter_form-body">
+            <form id="newsletterForm" action="/auth/newsletter" method="POST">
+                <div class="newsletter_form_group">
+                    <!-- EMAIL -->
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" />
+                </div>
+
+                <div class="newsletter_form_group">
+                    <!-- REGION -->
+                    <label for="region">Region</label>
+                    <input type="text" class="form-control" id="region" name="region" />
+                </div>
+
+                <div class="newsletter_form_group">
+                    <!-- FREQUENCY -->
+                    <label for="frequency">Frequency</label>
+                    <input type="radio" id="daily" name="frequency" value="daily">
+                    <label for="daily">Daily</label>
+                    <input type="radio" id="weekly" name="frequency" value="weekly">
+                    <label for="weekly">Weekly</label>
+                </div>
+
+                <button type="submit" class="btn_newsletter">Create Newsletter</button>
+            </form>
+            <div id="message" style="display: none;"></div> <!-- Повідомлення про успіх зі стилем display: none; -->
+        </div>
+    </div>
+    <script defer type="module" src="js/newsletter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Функція для відображення повідомлення та закриття вікна
+        function showMessageAndClose(message) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerText = message; // Встановлюємо текст повідомлення
+            messageDiv.style.display = "block"; // Показуємо повідомлення
+            setTimeout(() => {
+                messageDiv.style.display = "none"; // Через 5 секунд ховаємо повідомлення
+            }, 5000); // 5000 мс = 5 секунд
+        }
+
+        // Чекаємо на завершення завантаження сторінки
+        window.onload = function () {
+            // Перевіряємо чи є параметр message у URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const message = urlParams.get('message');
+            if (message) {
+                // Якщо є, показуємо повідомлення та закриваємо вікно через 5 секунд
+                showMessageAndClose(message);
+            }
+        };
+    </script>
+</body>
+
+</html>

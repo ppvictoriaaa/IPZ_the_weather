@@ -15,8 +15,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 db.connect((err) => {
-  if (err) throw err;
-  console.log(`Database is working: http://localhost:${PORT}`);
+  if (err) {
+    console.error("Database connection error:", err);
+  } else {
+    console.log("Database is working: http://localhost:5000");
+  }
 });
 
 app.use("/", require("./routes/pages"));

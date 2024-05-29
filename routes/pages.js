@@ -28,4 +28,8 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+router.get("/newsletter", (req, res) => {
+  res.render("newsletter");
+});
+
 module.exports = router;

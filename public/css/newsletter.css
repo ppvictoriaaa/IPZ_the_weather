@@ -1,0 +1,41 @@
+.frequency-options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.frequency-option {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.frequency-option input[type="radio"] {
+  display: none;
+}
+
+.frequency-option label {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  transition: all 0.3s;
+}
+
+.frequency-option input[type="radio"]:checked + label {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.frequency-option input[type="radio"]:checked + label::before {
+  content: "\2022";
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+}

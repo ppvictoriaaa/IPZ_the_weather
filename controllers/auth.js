@@ -78,7 +78,12 @@ exports.login = (req, res) => {
           message: "Email or Password is incorrect",
         });
       }
-
+      req.user = {
+        id: user.account_id,
+        username: user.username,
+        email: user.email,
+        profile_photo: user.profile_photo,
+      };
       const id = user.account_id;
       const username = user.username;
       const email = user.email;
@@ -144,28 +149,97 @@ exports.uploadPhoto = async (req, res) => {
         [photoPath, userId]
       );
 
-      // Отримання нових даних користувача після оновлення фото
-      const updatedUser = await db.query(
+      db.query(
         "SELECT * FROM account WHERE account_id = ?",
-        [userId]
+        [userId],
+        (error, results) => {
+          if (error) {
+            console.log("Database error:", error);
+            return res
+              .status(500)
+              .json({ success: false, message: "Database error" });
+          }
+
+          if (results.length === 0) {
+            console.log("No user found");
+            return res
+              .status(404)
+              .json({ success: false, message: "No user found" });
+          }
+
+          const updatedUser = results[0];
+          const new_profile_photo =
+            updatedUser.profile_photo + `?t=${new Date().getTime()}`; // Додавання унікального параметру до URL
+
+          res.json({ success: true, new_profile_photo });
+        }
       );
-
-      // Отримання інформації про користувача
-      const new_profile_photo = updatedUser[0];
-
-      // Оновлення посилання на зображення на сторінці за допомогою JavaScript
-      const script = `
-        <script>
-          const profilePicture = document.querySelector('.profile-picture img');
-          profilePicture.src = '${new_profile_photo}';
-        </script>
-      `;
-
-      // Перенаправлення користувача на сторінку профілю з оновленою інформацією
-      res.send(script + "<p>Photo uploaded successfully. Redirecting...</p>");
     } catch (error) {
       console.log("Database error:", error);
-      return res.status(500).redirect("/profile");
+      return res
+        .status(500)
+        .json({ success: false, message: "Database error" });
     }
+  });
+};
+
+exports.newsletter = (req, res) => {
+  const { email, region, frequency } = req.body;
+
+  // Отримання токену з кукі
+  const token = req.cookies.jwt;
+
+  // Перевірка та розшифрування токену
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const userId = decoded.id;
+
+    // Перевірка чи існує вже користувач з такою поштою в базі
+    db.query(
+      "SELECT * FROM newsletters WHERE user_id = ? AND email = ?",
+      [userId, email],
+      (error, results) => {
+        if (error) {
+          console.error("Database error:", error);
+          return res.status(500).json({ error: "Failed to check newsletter" });
+        }
+
+        if (results.length > 0) {
+          // Якщо користувач з такою поштою вже існує, оновлюємо інформацію
+          db.query(
+            "UPDATE newsletters SET region = ?, frequency = ? WHERE user_id = ? AND email = ?",
+            [region, frequency, userId, email],
+            (error, updateResults) => {
+              if (error) {
+                console.error("Database error:", error);
+                return res
+                  .status(500)
+                  .json({ error: "Failed to update newsletter" });
+              }
+            }
+          );
+        } else {
+          // Якщо користувача з такою поштою не існує, створюємо новий рядок
+          db.query(
+            "INSERT INTO newsletters (user_id, email, region, frequency) VALUES (?, ?, ?, ?)",
+            [userId, email, region, frequency],
+            (error, insertResults) => {
+              if (error) {
+                console.error("Database error:", error);
+                return res
+                  .status(500)
+                  .json({ error: "Failed to create newsletter" });
+              }
+              res.status(200).render("newsletter", {
+                message: "ok",
+              });
+            }
+          );
+        }
+      }
+    );
   });
 };
