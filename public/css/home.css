@@ -387,3 +387,37 @@ body {
 .card.glass:hover .card_footer {
   opacity: 0.6;
 }
+
+/* Custom styles for SweetAlert2 */
+.swal2-popup {
+  background-color: #fff;
+  border-radius: 10px;
+  color: var(--black-text);
+}
+
+.swal2-title {
+  font-size: 24px;
+}
+
+.swal2-content {
+  font-size: 18px;
+}
+
+.swal2-actions {
+  justify-content: center;
+}
+
+.swal2-footer {
+  justify-content: center;
+}
+
+.swal2-confirm {
+  background-color: var(--base-color);
+  border-radius: 5px;
+  padding: 10px 24px;
+  font-size: 18px;
+}
+
+.swal2-confirm:hover {
+  background-color: var(--base-color-active);
+}

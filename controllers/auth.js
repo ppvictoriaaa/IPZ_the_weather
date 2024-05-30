@@ -2,6 +2,8 @@ const db = require("../routes/db-config");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+const weatherService = require("../services/weatherService");
+
 exports.register = (req, res) => {
   console.log(req.body);
 
@@ -183,8 +185,17 @@ exports.uploadPhoto = async (req, res) => {
   });
 };
 
-exports.newsletter = (req, res) => {
+exports.newsletter = async (req, res) => {
   const { email, region, frequency } = req.body;
+
+  // Перевірка доступності міста перед збереженням в базу даних
+  const isAvailable = await weatherService.isCityAvailable(region);
+
+  if (isAvailable === false) {
+    return res.redirect(
+      "/newsletter?message=The city is not available. Please enter another city."
+    );
+  }
 
   // Отримання токену з кукі
   const token = req.cookies.jwt;
@@ -219,6 +230,10 @@ exports.newsletter = (req, res) => {
                   .status(500)
                   .json({ error: "Failed to update newsletter" });
               }
+              // Успішне оновлення
+              res.redirect(
+                "/newsletter?message=Newsletter updated successfully"
+              );
             }
           );
         } else {
@@ -233,9 +248,10 @@ exports.newsletter = (req, res) => {
                   .status(500)
                   .json({ error: "Failed to create newsletter" });
               }
-              res.status(200).render("newsletter", {
-                message: "ok",
-              });
+              // Успішне створення
+              res.redirect(
+                "/newsletter?message=Newsletter created successfully"
+              );
             }
           );
         }

@@ -18,19 +18,19 @@
                 <div class="newsletter_form_group">
                     <!-- EMAIL -->
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" />
+                    <input type="email" class="form-control" id="email" name="email" required />
                 </div>
 
                 <div class="newsletter_form_group">
                     <!-- REGION -->
                     <label for="region">Region</label>
-                    <input type="text" class="form-control" id="region" name="region" />
+                    <input type="text" class="form-control" id="region" name="region" required oninput="checkCityAvailability()"/>
                 </div>
 
                 <div class="newsletter_form_group">
                     <!-- FREQUENCY -->
                     <label for="frequency">Frequency</label>
-                    <input type="radio" id="daily" name="frequency" value="daily">
+                    <input type="radio" id="daily" name="frequency" value="daily" required>
                     <label for="daily">Daily</label>
                     <input type="radio" id="weekly" name="frequency" value="weekly">
                     <label for="weekly">Weekly</label>
@@ -38,20 +38,15 @@
 
                 <button type="submit" class="btn_newsletter">Create Newsletter</button>
             </form>
-            <div id="message" style="display: none;"></div> <!-- Повідомлення про успіх зі стилем display: none; -->
+            <div id="message" style="display: none;"></div>
         </div>
     </div>
-    <script defer type="module" src="js/newsletter.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // Функція для відображення повідомлення та закриття вікна
         function showMessageAndClose(message) {
             const messageDiv = document.getElementById('message');
-            messageDiv.innerText = message; // Встановлюємо текст повідомлення
-            messageDiv.style.display = "block"; // Показуємо повідомлення
-            setTimeout(() => {
-                messageDiv.style.display = "none"; // Через 5 секунд ховаємо повідомлення
-            }, 5000); // 5000 мс = 5 секунд
+            messageDiv.innerText = message;
+            messageDiv.style.display = "block";
         }
 
         // Чекаємо на завершення завантаження сторінки
@@ -60,7 +55,6 @@
             const urlParams = new URLSearchParams(window.location.search);
             const message = urlParams.get('message');
             if (message) {
-                // Якщо є, показуємо повідомлення та закриваємо вікно через 5 секунд
                 showMessageAndClose(message);
             }
         };

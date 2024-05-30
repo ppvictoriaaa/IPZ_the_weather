@@ -137,32 +137,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
     newCard.$card.classList.add("loading");
 
-    const data = await getWeatherData(location);
+    try {
+      const data = await getWeatherData(location);
 
-    newCard.$icon.style.backgroundImage = `url(https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png)`;
-    newCard.$title.textContent = data.name;
-    newCard.$desc.textContent = data.weather[0].description;
-    newCard.$temp.textContent = data.main.temp;
-    newCard.$wind.textContent = data.wind.speed;
-    newCard.$water.textContent = data.main.humidity;
+      newCard.$icon.style.backgroundImage = `url(https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+      newCard.$title.textContent = data.name;
+      newCard.$desc.textContent = data.weather[0].description;
+      newCard.$temp.textContent = data.main.temp;
+      newCard.$wind.textContent = data.wind.speed;
+      newCard.$water.textContent = data.main.humidity;
 
-    console.log(data);
-    setTimeout(function () {
-      document
-        .querySelector(".app_container")
-        .classList.add("app_container_top");
-      $body.style.backgroundImage = `url(img/${data.weather[0].icon}.jpg)`;
+      setTimeout(function () {
+        document
+          .querySelector(".app_container")
+          .classList.add("app_container_top");
+        $body.style.backgroundImage = `url(img/${data.weather[0].icon}.jpg)`;
 
-      if (currentCard !== null) {
-        // currentCard.$card.classList.remove("full")
-        currentCard.$card.classList.add("glass");
-      }
+        if (currentCard !== null) {
+          currentCard.$card.classList.add("glass");
+        }
 
-      currentCard = newCard;
+        currentCard = newCard;
 
+        newCard.$card.classList.remove("loading");
+        newCard.$card.classList.add("full");
+      }, 600);
+    } catch (error) {
+      // Відобразити сповіщення про помилку
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Try entering another city",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
+      // Приховати кружечок "loading"
       newCard.$card.classList.remove("loading");
-      newCard.$card.classList.add("full");
-    }, 600);
+
+      // Видалити картку
+      setTimeout(() => {
+        newCard.$card.remove();
+      }, 2000);
+    }
   }
 
   $locationForm.addEventListener("submit", function (event) {
