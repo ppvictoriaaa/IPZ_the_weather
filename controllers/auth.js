@@ -185,6 +185,9 @@ exports.uploadPhoto = async (req, res) => {
   });
 };
 
+// у вашому контроллері
+const { sendNewsletterEmail } = require("../services/emailService");
+
 exports.newsletter = async (req, res) => {
   const { email, region, frequency } = req.body;
 
@@ -208,53 +211,75 @@ exports.newsletter = async (req, res) => {
 
     const userId = decoded.id;
 
-    // Перевірка чи існує вже користувач з такою поштою в базі
+    // Отримання імені користувача
     db.query(
-      "SELECT * FROM newsletters WHERE user_id = ? AND email = ?",
-      [userId, email],
-      (error, results) => {
+      "SELECT username FROM account WHERE account_id = ?",
+      [userId],
+      (error, userResults) => {
         if (error) {
           console.error("Database error:", error);
-          return res.status(500).json({ error: "Failed to check newsletter" });
+          return res.status(500).json({ error: "Failed to fetch user" });
         }
 
-        if (results.length > 0) {
-          // Якщо користувач з такою поштою вже існує, оновлюємо інформацію
-          db.query(
-            "UPDATE newsletters SET region = ?, frequency = ? WHERE user_id = ? AND email = ?",
-            [region, frequency, userId, email],
-            (error, updateResults) => {
-              if (error) {
-                console.error("Database error:", error);
-                return res
-                  .status(500)
-                  .json({ error: "Failed to update newsletter" });
-              }
-              // Успішне оновлення
-              res.redirect(
-                "/newsletter?message=Newsletter updated successfully"
+        const username = userResults[0].username;
+
+        // Перевірка чи існує вже користувач з такою поштою в базі
+        db.query(
+          "SELECT * FROM newsletters WHERE user_id = ? AND email = ?",
+          [userId, email],
+          (error, results) => {
+            if (error) {
+              console.error("Database error:", error);
+              return res
+                .status(500)
+                .json({ error: "Failed to check newsletter" });
+            }
+
+            if (results.length > 0) {
+              // Якщо користувач з такою поштою вже існує, оновлюємо інформацію
+              db.query(
+                "UPDATE newsletters SET region = ?, frequency = ? WHERE user_id = ? AND email = ?",
+                [region, frequency, userId, email],
+                (error, updateResults) => {
+                  if (error) {
+                    console.error("Database error:", error);
+                    return res
+                      .status(500)
+                      .json({ error: "Failed to update newsletter" });
+                  }
+
+                  // Успішне оновлення
+                  const message = `Hello ${username}!\n\nYour weather newsletter subscription has been updated successfully. \nYou will continue to receive weather updates ${frequency} at 12pm.\nYour chosen region is ${region}`;
+                  sendNewsletterEmail(email, message);
+                  res.redirect(
+                    "/newsletter?message=Newsletter updated successfully"
+                  );
+                }
+              );
+            } else {
+              // Якщо користувача з такою поштою не існує, створюємо новий рядок
+              db.query(
+                "INSERT INTO newsletters (user_id, email, region, frequency) VALUES (?, ?, ?, ?)",
+                [userId, email, region, frequency],
+                (error, insertResults) => {
+                  if (error) {
+                    console.error("Database error:", error);
+                    return res
+                      .status(500)
+                      .json({ error: "Failed to create newsletter" });
+                  }
+
+                  // Успішне створення
+                  const message = `Hello ${username},\n\nYou have successfully created a weather newsletter subscription. \nYou will receive weather updates ${frequency} at 12pm.\nYour chosen region is ${region}`;
+                  sendNewsletterEmail(email, message);
+                  res.redirect(
+                    "/newsletter?message=Newsletter created successfully"
+                  );
+                }
               );
             }
-          );
-        } else {
-          // Якщо користувача з такою поштою не існує, створюємо новий рядок
-          db.query(
-            "INSERT INTO newsletters (user_id, email, region, frequency) VALUES (?, ?, ?, ?)",
-            [userId, email, region, frequency],
-            (error, insertResults) => {
-              if (error) {
-                console.error("Database error:", error);
-                return res
-                  .status(500)
-                  .json({ error: "Failed to create newsletter" });
-              }
-              // Успішне створення
-              res.redirect(
-                "/newsletter?message=Newsletter created successfully"
-              );
-            }
-          );
-        }
+          }
+        );
       }
     );
   });
