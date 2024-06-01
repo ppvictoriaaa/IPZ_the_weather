@@ -1,13 +1,19 @@
 const cron = require("node-cron");
 const db = require("../routes/db-config");
+const dotenv = require("dotenv").config();
+
 const util = require("util");
 const { sendNewsletterEmail } = require("./emailService");
 const { getCityCoordinates } = require("./cityCoordinatesService");
 const { getWeatherForecast } = require("./cityCoordinatesService");
+const {
+  groupForecastByDay,
+  generateWeatherSummary,
+} = require("./cityCoordinatesService");
 
 const query = util.promisify(db.query).bind(db);
 
-const API_KEY = "2f6eda8a8af558ce4ff7adf8d766b986";
+const API_KEY = process.env.API_KEY;
 
 const getUsernameById = async (userId) => {
   try {
@@ -41,19 +47,15 @@ const sendRegularNewsletter = async () => {
 
       if (
         frequency === "daily" ||
-        (frequency === "weekly" && dayOfWeek === 6)
+        (frequency === "weekly" && dayOfWeek === 5)
       ) {
         try {
           const { lat, lon } = await getCityCoordinates(region, API_KEY);
           const weatherData = await getWeatherForecast(lat, lon, API_KEY);
-          const weatherList = weatherData.list
-            .slice(0, 5)
-            .map((item) => {
-              return `${item.dt_txt}: ${item.weather[0].description}, Temp: ${item.main.temp}°C`;
-            })
-            .join("\n");
+          const dailyForecasts = groupForecastByDay(weatherData.list);
+          const weatherSummary = generateWeatherSummary(dailyForecasts);
 
-          message += `Here is your weather update for the ${region} region:\n\n${weatherList}\n`;
+          message += `Here is your weather update for the ${region} region:\n\n${weatherSummary}\n`;
         } catch (error) {
           message += `Unable to fetch weather data for ${region} at this time.\n`;
         }

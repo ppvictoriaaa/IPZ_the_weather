@@ -27,7 +27,38 @@ const getWeatherForecast = async (lat, lon, apiKey) => {
   }
 };
 
+const groupForecastByDay = (forecastList) => {
+  const dailyForecasts = {};
+  forecastList.forEach((item) => {
+    const date = item.dt_txt.split(" ")[0];
+    if (!dailyForecasts[date]) {
+      dailyForecasts[date] = [];
+    }
+    dailyForecasts[date].push(item);
+  });
+  return dailyForecasts;
+};
+
+const generateWeatherSummary = (dailyForecasts) => {
+  const dates = Object.keys(dailyForecasts).sort();
+  let summary = "";
+  for (let i = 0; i < 3; i++) {
+    const date = dates[i];
+    if (date) {
+      const dayForecast = dailyForecasts[date];
+      const temperatures = dayForecast.map((item) => item.main.temp);
+      const minTemp = Math.min(...temperatures);
+      const maxTemp = Math.max(...temperatures);
+      const description = dayForecast[0].weather[0].description;
+      summary += `${date}: ${description}, Min Temp: ${minTemp}°C, Max Temp: ${maxTemp}°C\n`;
+    }
+  }
+  return summary;
+};
+
 module.exports = {
   getCityCoordinates,
   getWeatherForecast,
+  groupForecastByDay,
+  generateWeatherSummary,
 };

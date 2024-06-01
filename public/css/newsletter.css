@@ -39,3 +39,10 @@
   left: 5px;
   transform: translateY(-50%);
 }
+
+.message_weather {
+  font-size: 25px;
+  color: rgb(7, 44, 84);
+  text-transform: uppercase;
+  text-align: center;
+}
