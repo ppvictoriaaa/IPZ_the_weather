@@ -1,23 +1,31 @@
+body {
+  font-family: Arial, Verdana, sans-serif;
+}
+
 .app_container_profile {
-  width: 80%; /* Ширина контейнера */
+  width: 70%; /* Ширина контейнера */
   margin: 0 auto; /* Автоматичні відступи зверху та знизу, автоматичне центрування по горизонталі */
   display: flex;
-  justify-content: space-between; /* Розміщення елементів по краях контейнера */
   background-color: #fff; /* Фон білий */
   padding: 30px; /* Відступи всередині контейнера */
   border-radius: 8px; /* Округлені кути */
+  gap: 10px;
+  justify-content: space-between; /* Розподілити простір між елементами */
+  align-items: center; /* Вирівняти елементи по вертикалі по центру */
 }
 
 .app_left_container {
-  flex: 1; /* Займає всю доступну ширину відступу контейнера */
-  max-width: 35%; /* Максимальна ширина лівого контейнера */
+  flex: 1;
 }
 
 .app_right_container {
-  flex: 1; /* Займає всю доступну ширину відступу контейнера */
-  max-width: 55%; /* Максимальна ширина правого контейнера */
-  text-align: left; /* Вирівнювання тексту по лівому краю */
-  overflow-wrap: break-word; /* Перенесення слова при виході за межі блоку */
+  flex: 1;
+  text-align: left;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 /* image upload */
@@ -30,6 +38,53 @@
 }
 
 .create-newsletter-button {
-  margin-top: 15px; /* Відступ від тексту до кнопки */
-  font-size: 14px; /* Розмір шрифту кнопки */
+  margin-top: 15px;
+  font-size: 20px;
+  background-color: rgb(7, 44, 84);
+  color: white;
+  border-radius: 5px;
+}
+
+.profile-picture {
+  width: 300px;
+  height: 200px;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20%;
+}
+
+.custom-file-upload {
+  cursor: pointer;
+  background-color: #f8f9fa;
+  color: #495057;
+  border: 1px solid #ced4da;
+  padding: 8px 12px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.custom-file-upload:hover {
+  background-color: #e9ecef;
+}
+
+/* Приховати оригінальний текст "Вибрати файл" */
+input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+/* Задати власний текст "Вибрати фото" */
+input[type="file"]::before {
+  content: "Click to chose your photo";
+  display: inline-block;
+  background-color: rgb(7, 44, 84);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
