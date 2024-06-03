@@ -43,6 +43,56 @@
 .message_weather {
   font-size: 20px;
   color: rgb(7, 44, 84);
-  text-transform: uppercase;
   text-align: center;
+  margin-top: 10px;
+  border-style: solid;
+  border-color: rgb(7, 44, 84);
+  border-width: 3px;
+}
+
+.newsletter_form-header {
+  font-size: 30px;
+  text-transform: uppercase;
+  color: rgb(7, 44, 84);
+  text-align: center;
+}
+
+.newsletter_form_group {
+  margin-bottom: 20px;
+}
+
+.newsletter_form_group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.radio-group input[type="radio"] {
+  margin-right: 5px;
+}
+
+.radio-group label {
+  margin: 0;
+}
+
+.newsletter_form-header {
+  margin-bottom: 20px;
+}
+
+.btn_newsletter {
+  margin-top: 15px;
+  font-size: 17px;
+  background-color: rgb(7, 44, 84);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 6px 10px 6px 10px;
+  border: none;
+  text-align: right;
 }

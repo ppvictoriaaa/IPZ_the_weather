@@ -33,14 +33,24 @@
                     </div>
                 <form id="photo-upload-form" action="/auth/upload-photo" method="POST" enctype="multipart/form-data">
                     <input type="file" name="profile_photo" accept="image/*" required />
-                    <button type="submit">Upload Photo</button>
+                    <span>then click "Apply photo" </span>
+                    <button class="apply_photo" type="submit">Apply photo</button>
                 </form>
 
                 </div>
             </div>
             <div class="app_right_container">
-                <h3>Welcome, <span>{{user.username}}</span>!</h3>
-                <p>This will allow you to receive weather updates daily in your selected region.</p>
+                <h1>Welcome, <span>{{user.username}}</span>!</h1>
+                <p>Dear user, the function of regular weather updates is now available for you.</p>
+                
+                <h4>Activation instructions:</h4>
+                <ol>
+                    <li>First, click on the "Create a weather newsletter" button</li>
+                    <li>Next, fill out the form (please note that using your profile mail is not required, you can enter another address)</li>
+                    <li>Click the "create a newsletter" button</li>
+                    <li>If the registration was successful, you will receive a notification to the email address you entered, otherwise,
+                    repeat the procedure and check for correctness of the entered data.</li>
+                </ol>
                 <button class="create-newsletter-button" id="create-newsletter-button">Create a weather
                     newsletter</button>
             </div>

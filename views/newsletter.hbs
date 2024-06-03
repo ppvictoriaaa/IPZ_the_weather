@@ -24,25 +24,30 @@
                 <div class="newsletter_form_group">
                     <!-- REGION -->
                     <label for="region">Region</label>
-                    <input type="text" class="form-control" id="region" name="region" required oninput="checkCityAvailability()"/>
+                    <input type="text" class="form-control" id="region" name="region" required
+                        oninput="checkCityAvailability()" />
                 </div>
 
                 <div class="newsletter_form_group">
                     <!-- FREQUENCY -->
-                    <label for="frequency">Frequency</label>
-                    <input type="radio" id="daily" name="frequency" value="daily" required>
-                    <label for="daily">Daily</label>
-                    <input type="radio" id="weekly" name="frequency" value="weekly">
-                    <label for="weekly">Weekly</label>
+                    <label>Frequency</label>
+                    <div class="radio-group">
+                        <input type="radio" id="daily" name="frequency" value="daily" required>
+                        <label for="daily">daily</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="weekly" name="frequency" value="weekly">
+                        <label for="weekly">weekly</label>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn_newsletter">Create Newsletter</button>
+                <button type="submit" class="btn_newsletter">Create a newsletter</button>
             </form>
             <div class="message_weather" id="message" style="display: none;"></div>
         </div>
     </div>
-<script defer type="module" src="js/newsletter.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer type="module" src="js/newsletter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

@@ -20,7 +20,6 @@ body {
 
 .app_right_container {
   flex: 1;
-  text-align: left;
   overflow-wrap: break-word;
   word-wrap: break-word;
   display: flex;
@@ -28,9 +27,8 @@ body {
   align-items: flex-start;
 }
 
-/* image upload */
 .image-upload-container {
-  text-align: left; /* Вирівнювання картинки по лівому краю */
+  text-align: left;
 }
 
 .upload-button:hover {
@@ -43,11 +41,15 @@ body {
   background-color: rgb(7, 44, 84);
   color: white;
   border-radius: 5px;
+  cursor: pointer;
+  padding: 6px 10px 6px 10px;
+  border: none;
+  text-align: right;
 }
 
 .profile-picture {
-  width: 300px;
-  height: 200px;
+  width: 450px;
+  height: 350px;
   padding-bottom: 15px;
   margin-bottom: 10px;
 }
@@ -73,12 +75,10 @@ body {
   background-color: #e9ecef;
 }
 
-/* Приховати оригінальний текст "Вибрати файл" */
 input[type="file"]::-webkit-file-upload-button {
   visibility: hidden;
 }
 
-/* Задати власний текст "Вибрати фото" */
 input[type="file"]::before {
   content: "Click to chose your photo";
   display: inline-block;
@@ -87,4 +87,22 @@ input[type="file"]::before {
   padding: 6px 10px;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 25px;
+  font-size: 20px;
+}
+
+.apply_photo {
+  background-color: white;
+  border-color: rgb(7, 44, 84);
+  border-width: 3px;
+  border-radius: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+h4 {
+  margin-bottom: 10px;
 }

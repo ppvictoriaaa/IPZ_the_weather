@@ -47,8 +47,8 @@ document
   .getElementById("create-newsletter-button")
   .addEventListener("click", function () {
     // Розмір вікна
-    var width = 600;
-    var height = 400;
+    var width = 620;
+    var height = 420;
 
     // Позиція вікна по середині
     var left = window.innerWidth / 2 - width / 2;

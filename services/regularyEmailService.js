@@ -43,11 +43,11 @@ const sendRegularNewsletter = async () => {
     for (const user of users) {
       const { user_id, email, region, frequency } = user;
       const username = await getUsernameById(user_id);
-      let message = `Hello ${username},\n\n`;
+      let message = `Hello ${username}!\n\n`;
 
       if (
         frequency === "daily" ||
-        (frequency === "weekly" && dayOfWeek === 5)
+        (frequency === "weekly" && dayOfWeek === 1)
       ) {
         try {
           const { lat, lon } = await getCityCoordinates(region, API_KEY);
