@@ -18,7 +18,7 @@ document
         const profilePicture = document.querySelector(".profile-picture img");
         profilePicture.src = result.new_profile_photo;
 
-        // Optional: Display a success message
+        // to display a success message
         Swal.fire({
           icon: "success",
           title: "Photo uploaded successfully!",
@@ -26,7 +26,6 @@ document
           timer: 1500,
         });
       } else {
-        // Handle error
         Swal.fire({
           icon: "error",
           title: "Error uploading photo",
