@@ -1,7 +1,6 @@
 const express = require("express");
 const db = require("./routes/db-config");
 const app = express();
-const jwt = require("jsonwebtoken");
 const cron = require("node-cron");
 const { sendRegularNewsletter } = require("./services/regularyEmailService");
 
@@ -26,7 +25,7 @@ db.connect((err) => {
   if (err) {
     console.error("Database connection error:", err);
   } else {
-    console.log("Database is working: http://localhost:5000");
+    console.log("Database is working: http://localhost:3000");
   }
 });
 

@@ -1,4 +1,3 @@
-const db = require("../routes/db-config");
 const jwt = require("jsonwebtoken");
 
 const checkAuth = (req, res, next) => {
