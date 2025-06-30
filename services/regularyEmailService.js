@@ -47,7 +47,7 @@ const sendRegularNewsletter = async () => {
 
       if (
         frequency === "daily" ||
-        (frequency === "weekly" && dayOfWeek === 3)
+        (frequency === "weekly" && dayOfWeek === 4)
       ) {
         try {
           const { lat, lon } = await getCityCoordinates(region, API_KEY);

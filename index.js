@@ -15,7 +15,7 @@ app.use(cookie());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-const scheduleTime = "52 02 * * *";
+const scheduleTime = "08 16 * * *";
 
 cron.schedule(scheduleTime, sendRegularNewsletter, {
   timezone: "Europe/Kiev",

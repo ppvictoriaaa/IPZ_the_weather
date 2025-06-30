@@ -7,7 +7,6 @@ function showMessageAndClose(message) {
 
 // Чекаємо на завершення завантаження сторінки
 window.onload = function () {
-  // Перевіряємо чи є параметр message у URL
   const urlParams = new URLSearchParams(window.location.search);
   const message = urlParams.get("message");
   if (message) {
